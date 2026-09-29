@@ -18,7 +18,7 @@ export type SyncAction =
   | { kind: "adopt"; name: string; source: string; target: string } // same content already present; just record it
   | { kind: "promote"; name: string; source: string; target: string } // target-only skill copied to the canonical root
   | { kind: "remove"; name: string; target: string; reason: string }
-  | { kind: "conflict"; name: string; target: string; reason: string };
+  | { kind: "conflict"; name: string; target: string; reason: string; source?: string };
 export type SyncPlan = { scope: string; targetRoot: string; actions: SyncAction[] };
 
 function listSkillDirs(root: string): Map<string, string> {
@@ -124,7 +124,7 @@ function planOne(scope: string, sources: string[], targetRoot: string, opts: { p
       } else if (recorded && recorded.hash === tgtHash) {
         actions.push({ kind: "update", name, source, target }); // source moved on; target untouched since last sync
       } else {
-        actions.push({ kind: "conflict", name, target, reason: recorded ? "edited in place since last sync" : "differs from canonical and was not created by sync" });
+        actions.push({ kind: "conflict", name, target, source, reason: recorded ? "edited in place since last sync" : "differs from canonical and was not created by sync" });
       }
     }
   }
@@ -165,6 +165,26 @@ export function planAll(repos: string[] = []): { plans: SyncPlan[]; skippedRepos
     plans.push(planOne(`repo:${basename(repo)}`, [join(repo, ".agents", "skills")], join(repo, ".claude", "skills"), { skip: userLevel }));
   }
   return { plans, skippedRepos };
+}
+
+export const MANIFEST_FILE = MANIFEST;
+
+/** Resolve an edited copy: overwrite it from canonical, or make it the new canonical. Both re-record the hash. */
+export function resolveConflict(plan: SyncPlan, name: string, choice: "use-canonical" | "keep-edit"): string {
+  const a = plan.actions.find((x) => x.kind === "conflict" && x.name === name);
+  if (!a || a.kind !== "conflict" || !a.source) throw new Error(`no resolvable conflict for ${name} in ${plan.scope}`);
+  const manifest = readManifest(plan.targetRoot);
+  if (choice === "use-canonical") {
+    rmSync(a.target, { recursive: true, force: true });
+    cpSync(realpathSync(a.source), a.target, { recursive: true, dereference: true });
+  } else {
+    const source = realpathSync(a.source);
+    rmSync(source, { recursive: true, force: true });
+    cpSync(a.target, source, { recursive: true, dereference: true });
+  }
+  manifest.skills[name] = { source: a.source, hash: hashDir(a.target), syncedAt: new Date().toISOString() };
+  writeFileSync(join(plan.targetRoot, MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`);
+  return `${choice} ${name}`;
 }
 
 export function applyPlan(plan: SyncPlan): string[] {

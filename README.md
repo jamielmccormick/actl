@@ -88,11 +88,19 @@ Tool homes follow each tool's own overrides: `CLAUDE_CONFIG_DIR`, `CODEX_HOME` a
 
 ## CLI
 
+The engine is the `actl` CLI. The Mac app uses it, and so can you or your agents. Every state command prints `{ schema, command, generatedAt, data }`. See [docs/engine-contract.md](docs/engine-contract.md).
+
 ```sh
-bun src/actl.ts inventory|findings|proxy     # JSON: { schema, command, data }
-bun src/actl.ts skills plan|apply [--repo=~/Code/app]
-bun src/actl.ts login claude|codex <server>  # MCP OAuth sign-in in your terminal
-bun build --compile src/actl.ts --outfile build/actl   # single self-contained binary
+bun src/actl.ts status                    # fast summary for the menu bar (reads the cache)
+bun src/actl.ts inventory|services|budget # full inventory, services across harnesses, context budget
+bun src/actl.ts budget --repo=~/Code/app  # plus the exact instruction files each harness loads there
+bun src/actl.ts manifest adopt            # write ~/.config/actl/manifest.toml from your current setup
+bun src/actl.ts plan                      # manifest vs this Mac: the changes actl would make
+bun src/actl.ts apply <id...>             # apply named actions; files are backed up first
+bun src/actl.ts activity | undo <runId>   # history, and undo a run
+bun src/actl.ts login claude|codex <server>
+bun test                                  # engine tests, run against fixture home directories
+bun run build:engine                      # single self-contained binary at build/actl
 ```
 
 ## Web dashboard (until the Mac app ships)

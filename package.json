@@ -1,0 +1,18 @@
+{
+  "name": "actl",
+  "version": "0.2.0",
+  "description": "The actual state of your coding agents: Claude Code and Codex, kept at parity.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test --timeout=30000",
+    "typecheck": "tsc --noEmit --strict --target esnext --module preserve --moduleResolution bundler --types bun --skipLibCheck --lib esnext --noUnusedLocals --noUnusedParameters src/*.ts test/*.ts",
+    "build:engine": "bun build --compile src/actl.ts --outfile build/actl",
+    "dashboard": "bun src/server.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "typescript": "^7.0.2"
+  }
+}

@@ -3,62 +3,12 @@
 import { existsSync, lstatSync, readdirSync, readFileSync, readlinkSync, realpathSync, statSync } from "node:fs";
 import { basename, dirname, join, relative } from "node:path";
 import { agentsHome, claudeHome, claudeJsonPath, codexHome, config, HOME, tilde } from "./config";
+import { claudePluginMcp, codexPluginMeta, type McpDecl } from "./plugins";
 import { planAll } from "./skills-sync";
+import { frontmatter, hasPathsFrontmatter, ls, readJson, readToml, run } from "./util";
 
 export type Severity = "error" | "warn" | "info";
 export type Finding = { severity: Severity; area: string; title: string; detail: string; fix?: string; items?: string[] };
-
-// ---------- helpers ----------
-
-function run(cmd: string[], cwd = HOME, timeoutMs = 60_000): { ok: boolean; out: string } {
-  try {
-    const p = Bun.spawnSync(cmd, { cwd, stdout: "pipe", stderr: "pipe", timeout: timeoutMs });
-    return { ok: p.exitCode === 0, out: `${p.stdout.toString()}${p.stderr.toString()}` };
-  } catch (e) {
-    return { ok: false, out: String(e) };
-  }
-}
-
-function readJson<T = any>(p: string): T | undefined {
-  try {
-    return JSON.parse(readFileSync(p, "utf8"));
-  } catch {
-    return undefined;
-  }
-}
-
-function readToml(p: string): any {
-  try {
-    return Bun.TOML.parse(readFileSync(p, "utf8"));
-  } catch {
-    return undefined;
-  }
-}
-
-function ls(dir: string): string[] {
-  try {
-    return readdirSync(dir).filter((n) => !n.startsWith("."));
-  } catch {
-    return [];
-  }
-}
-
-function frontmatter(md: string): Record<string, string> {
-  const m = md.match(/^---\n([\s\S]*?)\n---/);
-  if (!m) return {};
-  const out: Record<string, string> = {};
-  let key = "";
-  for (const line of m[1].split("\n")) {
-    const kv = line.match(/^([A-Za-z_-]+):\s*(.*)$/);
-    if (kv) {
-      key = kv[1];
-      out[key] = kv[2].replace(/^[>|]-?\s*$/, "").replace(/^["']|["']$/g, "");
-    } else if (key && /^\s+\S/.test(line)) {
-      out[key] = `${out[key]} ${line.trim()}`.trim();
-    }
-  }
-  return out;
-}
 
 // ---------- repositories ----------
 
@@ -184,7 +134,7 @@ function describeInstruction(path: string, scope: InstructionFile["scope"], owne
     tracked,
     shimOnlyImportsAgents: imports.includes("AGENTS.md") && meaningful.length < 200,
     // Claude rules with `paths:` frontmatter load only when a matching file is read.
-    pathScoped: /^---\n[\s\S]*?^paths:/m.test(text.split(/\n---\n/)[0] + "\n"),
+    pathScoped: hasPathsFrontmatter(text),
     imports,
     loadedBy,
     preview: text.slice(0, 4000),
@@ -341,8 +291,8 @@ function collectSkills(repos: Repo[], codexCfg: any, claudePlugins: ClaudePlugin
 
 // ---------- plugins ----------
 
-export type ClaudePlugin = { id: string; enabled: boolean; version?: string; installPath?: string; hasMcp: boolean; hasSkills: boolean };
-export type CodexPlugin = { id: string; enabled: boolean; cached: boolean; version?: string; connector: boolean };
+export type ClaudePlugin = { id: string; name: string; enabled: boolean; version?: string; installPath?: string; hasMcp: boolean; hasSkills: boolean; mcpServers: McpDecl[] };
+export type CodexPlugin = { id: string; enabled: boolean; cached: boolean; version?: string; connector: boolean; displayName?: string };
 
 function collectClaudePlugins(): ClaudePlugin[] {
   const settings = readJson(claudeHome("settings.json")) ?? {};
@@ -351,13 +301,16 @@ function collectClaudePlugins(): ClaudePlugin[] {
   return [...ids].map((id) => {
     const inst = installed[id]?.[0];
     const p = inst?.installPath;
+    const mcpServers = claudePluginMcp(p);
     return {
       id,
+      name: readJson(join(p ?? "", ".claude-plugin", "plugin.json"))?.name ?? id.split("@")[0],
       enabled: settings.enabledPlugins?.[id] === true,
       version: inst?.version,
       installPath: p,
-      hasMcp: !!p && (existsSync(join(p, ".mcp.json")) || ls(p).some((f) => f.startsWith("mcp.claude"))),
+      hasMcp: mcpServers.length > 0,
       hasSkills: !!p && existsSync(join(p, "skills")),
+      mcpServers,
     };
   });
 }
@@ -366,6 +319,7 @@ function collectCodexPlugins(codexCfg: any): CodexPlugin[] {
   // `codex plugin list` includes ChatGPT connector plugins that never appear in config.toml.
   // Row format: "<name>@<marketplace>  installed, enabled  <version>  <source>".
   const out = new Map<string, CodexPlugin>();
+  const meta = codexPluginMeta();
   for (const line of run(["codex", "plugin", "list"], HOME, 120_000).out.split("\n")) {
     const m = line.match(/^(\S+@\S+)\s+installed, (enabled|disabled)\s+(\S+)?\s*(\S+)?/);
     if (!m) continue;
@@ -375,13 +329,15 @@ function collectCodexPlugins(codexCfg: any): CodexPlugin[] {
       enabled: m[2] === "enabled",
       version: m[3],
       cached: existsSync(codexHome("plugins", "cache", mkt, name)),
-      connector: /^plugin_(connector|asdk_app)_/.test(m[4] ?? ""),
+      // Connector plugins ship a ChatGPT app (.app.json); the remote source id says so too.
+      connector: meta.get(m[1]) ? meta.get(m[1])!.app : /^plugin_(connector|asdk_app)_/.test(m[4] ?? ""),
+      displayName: meta.get(m[1])?.displayName,
     });
   }
   for (const [id, v] of Object.entries(codexCfg?.plugins ?? {}) as [string, any][]) {
     if (out.has(id)) continue;
     const [name, mkt] = id.split("@");
-    out.set(id, { id, enabled: v?.enabled !== false, cached: existsSync(codexHome("plugins", "cache", mkt ?? "", name)), connector: false });
+    out.set(id, { id, enabled: v?.enabled !== false, cached: existsSync(codexHome("plugins", "cache", mkt ?? "", name)), connector: !!meta.get(id)?.app, displayName: meta.get(id)?.displayName });
   }
   return [...out.values()];
 }
@@ -392,14 +348,14 @@ export type McpRow = {
   name: string;
   target: string;
   claude?: { scope: string; status: "connected" | "failed" | "needs-auth" | "blocked" | "pending" | "unknown"; detail: string; serverName?: string };
-  codex?: { enabled: boolean; auth: string; transport: string; serverName?: string };
+  codex?: { enabled: boolean; auth: string; transport: string; serverName?: string; pluginId?: string };
   notes: string[];
 };
 
 // One row per service: plugin servers key on the plugin name (so zoom-plugin's seven servers are one row),
 // and vendor suffixes are dropped so "monday-crm" (Claude) and "monday-com" (Codex) line up.
-const serviceKey = (s: string) => {
-  let k = s.toLowerCase().replace(/^claude\.ai\s+/, "");
+export const serviceKey = (s: string) => {
+  let k = s.toLowerCase().replace(/^claude\.ai\s+/, "").replace(/@.*$/, "").replace(/\.(com|io|ai|dev|app|so)$/, "");
   const plugin = k.match(/^plugin:([^:]+):/);
   if (plugin) k = plugin[1];
   const key = k.replace(/[-_](plugin|sales|crm|com|mcp|ai-companion)$/, "").replace(/[^a-z0-9]/g, "");
@@ -448,7 +404,7 @@ function collectMcp(repos: Repo[], codexPlugins: CodexPlugin[]) {
       // Several servers for one service: keep the worst status and say how many there are.
       if (STATUS_RANK.indexOf(next.status) < STATUS_RANK.indexOf(row.claude.status)) row.claude = { ...next, detail: next.detail };
       const n = claudeRows.filter((x) => serviceKey(x.name) === serviceKey(r.name)).length;
-      row.claude.detail = `${n} servers; worst: ${row.claude.detail}`;
+      row.claude.detail = `${n} servers; worst: ${row.claude.detail.replace(/^\d+ servers; worst: /, "")}`;
     }
   }
   for (const name of Object.keys(needsAuthCache)) {
@@ -463,9 +419,11 @@ function collectMcp(repos: Repo[], codexPlugins: CodexPlugin[]) {
   }
   // ChatGPT connector plugins give Codex the same service without an MCP entry in config.toml.
   for (const p of codexPlugins.filter((p) => p.connector && p.enabled)) {
-    const name = p.id.split("@")[0];
+    // Some connector ids are opaque ("app-69d9…"); the manifest's display name lines them up with Claude.
+    const id = p.id.split("@")[0];
+    const name = /^app-[0-9a-f]{12,}$/.test(id) && p.displayName ? p.displayName : id;
     const row = get(name, `ChatGPT connector (${p.id})`);
-    row.codex ??= { enabled: true, auth: "chatgpt-connector", transport: "connector" };
+    row.codex ??= { enabled: true, auth: "chatgpt-connector", transport: "connector", pluginId: p.id };
   }
   for (const row of rows.values()) {
     // Codex manages its own plugin-cache paths; only hand-configured Claude servers are fragile here.
@@ -547,7 +505,7 @@ function driftFindings(repos: Repo[], codexCfg: any): Finding[] {
     f.push({ severity: "info", area: "skills", title: `${skippedRepos.length} repos keep .agents/skills that Claude can't see`, detail: "These repos don't gitignore .claude/skills, so sync won't write copies there.", items: skippedRepos.map((s) => tilde(s.repo)) });
 
   const argentRule = claudeHome("rules", "argent.md");
-  if (existsSync(argentRule) && !/^---[\s\S]*?\npaths:/m.test(readFileSync(argentRule, "utf8").split("\n---\n")[0] + "\n"))
+  if (existsSync(argentRule) && !hasPathsFrontmatter(readFileSync(argentRule, "utf8")))
     f.push({ severity: "warn", area: "instructions", title: "Argent rule is always-on again in Claude", detail: "`argent update` restored ~/.claude/rules/argent.md without path scoping (~4k tokens every session).", fix: "Re-apply the paths frontmatter (see backup argent.md in ~/.claude/backups/instruction-cleanup-*)." });
   if (typeof codexCfg.developer_instructions === "string" && codexCfg.developer_instructions.includes("argent rules"))
     f.push({ severity: "warn", area: "instructions", title: "Argent rules are always-on again in Codex", detail: "`argent update` re-injected its 17 KB block into developer_instructions in ~/.codex/config.toml.", fix: "Remove the block between the argent rules markers; the pointer in ~/.codex/AGENTS.md covers routing." });

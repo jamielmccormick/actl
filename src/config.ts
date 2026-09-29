@@ -32,8 +32,21 @@ export const codexHome = (...p: string[]) => join(codexDir, ...p);
 // The cross-tool Agent Skills location (agentskills.io), read natively by Codex.
 export const agentsHome = (...p: string[]) => join(HOME, ".agents", ...p);
 
-const configDir = join(process.env.XDG_CONFIG_HOME ? expand(process.env.XDG_CONFIG_HOME) : join(HOME, ".config"), "actl");
+export const configDir = join(process.env.XDG_CONFIG_HOME ? expand(process.env.XDG_CONFIG_HOME) : join(HOME, ".config"), "actl");
 export const configPath = join(configDir, "config.toml");
+export const cacheDir = join(process.env.XDG_CACHE_HOME ? expand(process.env.XDG_CACHE_HOME) : join(HOME, ".cache"), "actl");
+
+// Engine state. The manifest, activity log and backups are the user's; caches are safe to delete.
+export const paths = {
+  manifest: join(configDir, "manifest.toml"),
+  state: join(configDir, "state.json"),
+  activity: join(configDir, "activity.jsonl"),
+  backups: join(configDir, "backups"),
+  inventoryCache: join(cacheDir, "inventory.json"),
+  proxyCache: join(cacheDir, "proxy.json"),
+  pluginCosts: join(cacheDir, "plugin-costs.json"),
+  logos: join(HOME, "Library", "Caches", "actl", "logos"),
+};
 
 const DEFAULT_ROOTS = ["~/Code", "~/Developer", "~/Projects", "~/src", "~/dev", "~/repos", "~/work", "~/GitHub"];
 

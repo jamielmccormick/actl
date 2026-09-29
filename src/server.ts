@@ -1,19 +1,21 @@
 // Local-only dashboard server. Binds to 127.0.0.1; read-only in v1.
 import { listJobs, loginTargets, startLogin, type Tool } from "./actions";
 import { cliproxy } from "./cliproxy";
-import type { collect } from "./collect";
+import type { FullInventory } from "./inventory";
 
 const PORT = Number(process.env.ACTL_PORT ?? 4777);
 const publicDir = new URL("../public/", import.meta.url).pathname;
 
-let cache: { at: number; data: ReturnType<typeof collect> } | undefined;
-let inflight: Promise<ReturnType<typeof collect>> | undefined;
+let cache: { at: number; data: FullInventory } | undefined;
+let inflight: Promise<FullInventory> | undefined;
 
 async function inventory(refresh: boolean) {
   if (!refresh && cache && Date.now() - cache.at < 5 * 60_000) return cache.data;
   // Collect in a child process: the collector shells out synchronously and would otherwise block every request.
-  inflight ??= new Response(Bun.spawn(["bun", new URL("./collect.ts", import.meta.url).pathname], { stdout: "pipe", stderr: "ignore" }).stdout)
+  // Through the engine, so the dashboard sees services and budget too and the status cache stays fresh.
+  inflight ??= new Response(Bun.spawn(["bun", new URL("./actl.ts", import.meta.url).pathname, "inventory"], { stdout: "pipe", stderr: "ignore" }).stdout)
     .json()
+    .then((envelope) => (envelope as { data: FullInventory }).data)
     .then((data) => {
       cache = { at: Date.now(), data };
       return data;

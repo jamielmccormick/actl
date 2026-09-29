@@ -22,7 +22,7 @@ export function loginTargets(inventory: any): Record<Tool, Set<string>> {
   const codex = new Set<string>();
   for (const row of inventory?.mcp?.rows ?? []) {
     if (row.claude?.serverName && ["needs-auth", "connected", "failed"].includes(row.claude.status) && row.claude.scope !== "claude.ai") claude.add(row.claude.serverName);
-    if (row.codex?.serverName && row.codex.auth === "o_auth") codex.add(row.codex.serverName);
+    if (row.codex?.serverName && (row.codex.auth === "o_auth" || row.codex.auth === "not_logged_in")) codex.add(row.codex.serverName);
   }
   return { claude, codex };
 }
@@ -56,4 +56,26 @@ export function startLogin(tool: Tool, name: string, allowed: Record<Tool, Set<s
 
 export function listJobs(): LoginJob[] {
   return [...jobs.values()].sort((a, b) => b.startedAt.localeCompare(a.startedAt)).slice(0, 20);
+}
+
+export type LoginEvent =
+  | { type: "opening"; harness: Tool; server: string }
+  | { type: "waiting"; harness: Tool; server: string }
+  | { type: "done"; harness: Tool; server: string; ok: boolean; message?: string };
+
+/** The same PTY trick for the CLI's --json mode: the harness opens the browser and stores the token itself. */
+export async function loginWithEvents(tool: Tool, name: string, emit: (e: LoginEvent) => void): Promise<number> {
+  emit({ type: "opening", harness: tool, server: name });
+  const proc = Bun.spawn(["script", "-q", "/dev/null", tool, "mcp", "login", name], { cwd: homedir(), stdin: "ignore", stdout: "ignore", stderr: "ignore" });
+  emit({ type: "waiting", harness: tool, server: name });
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    proc.kill();
+  }, TIMEOUT_MS);
+  const code = await proc.exited;
+  clearTimeout(timer);
+  const ok = code === 0 && !timedOut;
+  emit({ type: "done", harness: tool, server: name, ok, message: ok ? undefined : timedOut ? "timed out after 5 minutes" : `${tool} mcp login exited with ${code}` });
+  return ok ? 0 : 1;
 }
