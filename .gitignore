@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.log
+build/
+# Third-party service logos are trademarks: resolved at runtime, never committed.
+design/service-logos/
+# Screen mockups use real local data; publish curated assets from design/brand only.
+design/exports/
+*.bun-build

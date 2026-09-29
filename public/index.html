@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>actl</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-row">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <h1>actl</h1>
+        <span class="muted small" id="collected" title="">loading…</span>
+      </div>
+      <div class="versions small mono" id="versions"></div>
+      <div class="topbar-actions">
+        <label class="search">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+          <input id="search" type="search" placeholder="Search this view" autocomplete="off" spellcheck="false" />
+          <kbd>/</kbd>
+        </label>
+        <button id="refresh" class="btn" type="button" title="Re-collect inventory (takes 5–10s)">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M13 8a5 5 0 1 1-1.5-3.6"/><path d="M13 2v3h-3"/></svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist">
+      <button role="tab" data-tab="overview"><span>Overview</span><kbd>1</kbd></button>
+      <button role="tab" data-tab="mcp"><span>MCP</span><kbd>2</kbd></button>
+      <button role="tab" data-tab="skills"><span>Skills</span><kbd>3</kbd></button>
+      <button role="tab" data-tab="instructions"><span>Instructions</span><kbd>4</kbd></button>
+      <button role="tab" data-tab="plugins"><span>Plugins</span><kbd>5</kbd></button>
+      <button role="tab" data-tab="proxy"><span>Proxy</span><kbd>6</kbd></button>
+    </nav>
+  </header>
+
+  <main id="main" class="main">
+    <div class="empty" id="boot">Loading inventory…</div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

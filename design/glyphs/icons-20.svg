@@ -1,0 +1,26 @@
+<!-- Agent Console icon set, 20-unit grid, stroke 1.6, round caps/joins. Use currentColor via host. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<symbol id="home"><path d="M3 9.5 10 3.5l7 6V16.5h-4.5v-4.5h-5v4.5H3z"/></symbol>
+<symbol id="services"><rect x="3" y="3" width="5.5" height="5.5" rx="1.5"/><rect x="11.5" y="3" width="5.5" height="5.5" rx="1.5"/><rect x="3" y="11.5" width="5.5" height="5.5" rx="1.5"/><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1.5"/></symbol>
+<symbol id="skills"><path d="M10 2.8l2.2 4.6 5 .7-3.6 3.5.9 5L10 14.2l-4.5 2.4.9-5L2.8 8.1l5-.7z"/></symbol>
+<symbol id="instructions"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.5 10h5M7.5 13h5"/></symbol>
+<symbol id="proxy"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3c2.8 3 2.8 11 0 14M10 3c-2.8 3-2.8 11 0 14"/></symbol>
+<symbol id="context-budget"><rect x="2.5" y="6" width="15" height="8" rx="2"/><rect x="5" y="8.5" width="6" height="3" rx="1" fill="#000" stroke="none"/></symbol>
+<symbol id="review-changes"><path d="M3.5 10h13M11.5 5l5 5-5 5"/></symbol>
+<symbol id="activity"><circle cx="10" cy="10" r="7"/><path d="M10 6v4.5l3 1.8"/></symbol>
+<symbol id="status-connected"><circle cx="10" cy="10" r="7.2"/><path d="m6.6 10.3 2.4 2.4 4.6-5"/></symbol>
+<symbol id="status-needs-sign-in"><circle cx="7.5" cy="7.5" r="3.8"/><path d="M10.3 10.3 17 17M14.6 14.6l1.8-1.8"/></symbol>
+<symbol id="status-failed"><circle cx="10" cy="10" r="7.2"/><path d="m7.2 7.2 5.6 5.6M12.8 7.2l-5.6 5.6"/></symbol>
+<symbol id="status-blocked"><circle cx="10" cy="10" r="7.2"/><path d="M5.2 14.8 14.8 5.2"/></symbol>
+<symbol id="status-syncing"><path d="M3.5 8.5A6.5 6.5 0 0 1 15 5M16.5 11.5A6.5 6.5 0 0 1 5 15M15 2.5V5h-2.5M5 17.5V15h2.5"/></symbol>
+<symbol id="status-drift"><path d="M3 6.5h10M7 13.5h10M13 3.5 7 16.5"/></symbol>
+<symbol id="status-update"><circle cx="10" cy="10" r="7.2"/><path d="M10 14V6M6.8 9.2 10 6l3.2 3.2"/></symbol>
+<symbol id="harness-claude"><rect x="2.5" y="2.5" width="15" height="15" rx="4"/><rect x="5.5" y="6" width="3.6" height="8" rx="1.2" fill="#C4613A" stroke="none"/><rect x="10.9" y="6" width="3.6" height="8" rx="1.2" stroke-width="1.2"/></symbol>
+<symbol id="harness-codex"><rect x="2.5" y="2.5" width="15" height="15" rx="4"/><rect x="5.5" y="6" width="3.6" height="8" rx="1.2" stroke-width="1.2"/><rect x="10.9" y="6" width="3.6" height="8" rx="1.2" fill="#2E7A69" stroke="none"/></symbol>
+<symbol id="action-sign-in"><path d="M11.5 3.5h4a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-4M3 10h9M9 7l3 3-3 3"/></symbol>
+<symbol id="action-apply"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="m6.5 10.3 2.4 2.4 4.6-5"/></symbol>
+<symbol id="action-review"><path d="M3 5.5h14M3 10h9M3 14.5h6M13 12.8l1.6 1.7 3-3.5"/></symbol>
+<symbol id="action-terminal"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><path d="m6 8 2.5 2L6 12M10.5 12.5H14"/></symbol>
+<symbol id="action-copy"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M13 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/></symbol>
+<symbol id="action-reveal"><path d="M2.5 5.5A1.5 1.5 0 0 1 4 4h4l2 2h6.5A1.5 1.5 0 0 1 18 7.5v7a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 14.5z"/><path d="M2.5 9h15"/></symbol>
+</svg>
