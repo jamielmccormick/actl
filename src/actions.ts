@@ -66,7 +66,9 @@ export type LoginEvent =
 /** The same PTY trick for the CLI's --json mode: the harness opens the browser and stores the token itself. */
 export async function loginWithEvents(tool: Tool, name: string, emit: (e: LoginEvent) => void): Promise<number> {
   emit({ type: "opening", harness: tool, server: name });
-  const proc = Bun.spawn(["script", "-q", "/dev/null", tool, "mcp", "login", name], { cwd: homedir(), stdin: "ignore", stdout: "ignore", stderr: "ignore" });
+  const proc = Bun.spawn(["script", "-q", "/dev/null", tool, "mcp", "login", name], { cwd: homedir(), stdin: "ignore", stdout: "pipe", stderr: "ignore" });
+  // Drained while the login runs; its last line explains a failure better than an exit code.
+  const output = new Response(proc.stdout).text();
   emit({ type: "waiting", harness: tool, server: name });
   let timedOut = false;
   const timer = setTimeout(() => {
@@ -76,6 +78,18 @@ export async function loginWithEvents(tool: Tool, name: string, emit: (e: LoginE
   const code = await proc.exited;
   clearTimeout(timer);
   const ok = code === 0 && !timedOut;
-  emit({ type: "done", harness: tool, server: name, ok, message: ok ? undefined : timedOut ? "timed out after 5 minutes" : `${tool} mcp login exited with ${code}` });
+  const reason = ok || timedOut ? undefined : failureReason(await output.catch(() => ""));
+  emit({ type: "done", harness: tool, server: name, ok, message: ok ? undefined : timedOut ? "timed out after 5 minutes" : reason ?? `${tool} mcp login exited with ${code}` });
   return ok ? 0 : 1;
+}
+
+/** Last meaningful line of the harness's login output, without terminal escapes or hyperlinks. */
+export function failureReason(raw: string): string | undefined {
+  const clean = raw
+    .replace(/\x1b\]8;;[^\x07\x1b]*(\x07|\x1b\\)/g, "")
+    .replace(/\x1b\[[0-9;?]*[A-Za-z]/g, "")
+    .replace(/\r/g, "\n");
+  const lines = clean.split("\n").map((l) => l.trim()).filter((l) => l && !/claude\.ai connectors are disabled/.test(l));
+  const line = lines.reverse().find((l) => /couldn|error|fail|incompatible|denied|invalid|not supported/i.test(l)) ?? lines[0];
+  return line ? line.slice(0, 240) : undefined;
 }

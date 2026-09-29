@@ -528,3 +528,23 @@ describe("logos", () => {
     }
   });
 });
+
+describe("login failures", () => {
+  test("failureReason keeps the harness's explanation, not terminal noise", async () => {
+    const { failureReason } = await import("../src/actions");
+    const raw = 'Starting authentication for "x"…\r\n\x1b]8;;https://example.com\x07link\x1b]8;;\x07\r\n\x1b[31mCouldn\'t complete authentication for "x": Incompatible auth server: does not support dynamic client registration\x1b[0m\r\n';
+    expect(failureReason(raw)).toBe('Couldn\'t complete authentication for "x": Incompatible auth server: does not support dynamic client registration');
+    expect(failureReason("")).toBeUndefined();
+  });
+});
+
+describe("sign-in eligibility", () => {
+  test("no sign-in offered when the failure can't be fixed by signing in", async () => {
+    const { signInCanHelp } = await import("../src/services");
+    expect(signInCanHelp("needs-auth", "Needs authentication")).toBe(true);
+    expect(signInCanHelp("failed", "Failed to connect")).toBe(true);
+    expect(signInCanHelp("failed", "Failed to connect — Incompatible auth server: does not support dynamic client registration")).toBe(false);
+    expect(signInCanHelp("failed", "Server rejected the configured Authorization header (HTTP 401) — OAuth fallback is disabled")).toBe(false);
+    expect(signInCanHelp("blocked", "")).toBe(false);
+  });
+});

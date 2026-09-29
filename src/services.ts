@@ -73,6 +73,13 @@ export function pluginContext(p: ClaudePlugin): { tokens: number; estimated: boo
   return { tokens: estTokens(listing), estimated: true };
 }
 
+
+// Failures that a browser sign-in can't fix: the auth server won't register Claude as a client, or the
+// server is configured with a fixed Authorization header (OAuth fallback disabled).
+const SIGN_IN_CANNOT_HELP = /dynamic client registration|Incompatible auth server|OAuth fallback is disabled|configured Authorization header/i;
+export const signInCanHelp = (status: string | undefined, detail: string | undefined) =>
+  ["needs-auth", "failed", "connected"].includes(status ?? "") && !(status === "failed" && SIGN_IN_CANNOT_HELP.test(detail ?? ""));
+
 function rootOf(url?: string): string | undefined {
   try {
     const host = new URL(url!).hostname.split(".");
@@ -137,7 +144,7 @@ export function buildServices(inv: Inventory, manifest?: Manifest): Service[] {
       detail: !p.enabled ? "plugin installed but disabled" : worst ? clip(worst.detail) : "not reported by `claude mcp list`",
       auth: http ? "oauth" : "none",
       // One OAuth server only: a server authenticated by an env token header can't be signed in to.
-      canSignIn: p.enabled && p.mcpServers.length === 1 && http && !p.mcpServers[0].needsEnv && ["needs-auth", "failed", "connected"].includes(worst?.status ?? ""),
+      canSignIn: p.enabled && p.mcpServers.length === 1 && http && !p.mcpServers[0].needsEnv && signInCanHelp(worst?.status, worst?.detail),
       contextTokens: p.enabled ? cost.tokens : 0,
       contextEstimated: cost.estimated,
       skills: inv.skills.filter((sk) => sk.source === "claude-plugin" && sk.owner === p.id).map((sk) => sk.name),
@@ -168,7 +175,7 @@ export function buildServices(inv: Inventory, manifest?: Manifest): Service[] {
           health: r.claude.status,
           detail: clip(r.claude.detail),
           auth: http ? "oauth" : "none",
-          canSignIn: http && ["needs-auth", "failed", "connected"].includes(r.claude.status),
+          canSignIn: http && signInCanHelp(r.claude.status, r.claude.detail),
           skills: [],
           contextTokens: 0,
         });
