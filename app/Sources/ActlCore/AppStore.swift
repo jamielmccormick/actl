@@ -518,6 +518,13 @@ public final class AppStore {
         startSignIn(items)
     }
 
+    /// Sign in to one service, then carry on through that harness's other servers that still need it,
+    /// so a single "Sign in" click behaves like the queue (Skip and Stop remain available).
+    public func startSignInThenRest(_ first: SignInItem) {
+        let rest = signInCandidates(harness: first.harness).filter { $0.server != first.server }
+        startSignIn([first] + rest)
+    }
+
     /// Every provider that can sign in, across services, for one harness (or all).
     public func signInCandidates(harness: HarnessId? = nil) -> [SignInItem] {
         guard let list = services.value else { return [] }

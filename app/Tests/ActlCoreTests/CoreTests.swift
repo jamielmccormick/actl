@@ -290,3 +290,20 @@ import Testing
         #expect(data.count == 1_048_576)
     }
 }
+
+@Suite struct SignInQueueing {
+    /// A single-service "Sign in" continues through the harness's other servers that need sign-in.
+    @MainActor @Test func singleServiceSignInQueuesTheRest() async throws {
+        let store = AppStore(engine: FixtureEngine(delay: .zero), isFixtures: true, preferences: Preferences())
+        await store.refreshServices()
+        let candidates = store.signInCandidates(harness: "claude")
+        try #require(candidates.count > 1)
+        let first = candidates[candidates.count - 1]
+        store.startSignInThenRest(first)
+        let queue = try #require(store.signIn)
+        #expect(queue.items.first?.server == first.server)
+        #expect(queue.items.count == candidates.count)
+        #expect(Set(queue.items.map(\.server)) == Set(candidates.map(\.server)))
+        store.stopSignIn()
+    }
+}

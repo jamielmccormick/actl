@@ -236,7 +236,7 @@ struct ServiceDetail: View {
             Spacer()
             if let (h, p) = signInTarget {
                 Button("Sign in to \(store.harness(h)?.name.split(separator: " ").first ?? "")…") {
-                    store.startSignIn([SignInItem(harness: h, server: p.serverName ?? p.ref, serviceName: service.name, serviceId: service.id)])
+                    store.startSignInThenRest(SignInItem(harness: h, server: p.serverName ?? p.ref, serviceName: service.name, serviceId: service.id))
                     openWindow(id: WindowID.signIn)
                 }
                 .buttonStyle(.borderedProminent)

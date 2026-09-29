@@ -131,7 +131,7 @@ struct CommandPalette: View {
             for h in store.managedHarnesses {
                 if let p = s.providers[h.id], p.canSignIn, p.health == .needsAuth {
                     out.append(PaletteItem(id: "signin:\(h.id):\(s.id)", section: .actions, title: "Sign in to \(s.name) in \(h.name)", hint: "opens browser", service: s) {
-                        store.startSignIn([SignInItem(harness: h.id, server: p.serverName ?? p.ref, serviceName: s.name, serviceId: s.id)])
+                        store.startSignInThenRest(SignInItem(harness: h.id, server: p.serverName ?? p.ref, serviceName: s.name, serviceId: s.id))
                         openWindow(id: WindowID.signIn)
                     })
                 }
