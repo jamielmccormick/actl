@@ -126,6 +126,15 @@ endpoint = "http://127.0.0.1:8317"
   - Signed builds: prebuilt downloads need a Developer ID signature and notarization, which requires a paid Apple Developer account. Until then, source builds avoid Gatekeeper quarantine because nothing is downloaded.
 - **Privacy.** No telemetry and no network calls except those needed for health checks, sign-ins and logo fetches. Secrets never leave the engine process.
 
+## Decisions (2026-09-29)
+
+- **Services vs skills.** Only integrations that connect to an outside system are services. Skills-only plugins (for example, writing kits) appear under Skills, grouped by their plugin.
+- **Make lazy.** Swapping a plugin for its bare MCP server, which drops the plugin's skill listing and its per-session context cost, is a one-click action on a service. It is recorded in the activity log with Undo.
+- **Sign-in queue.** Several sign-ins run back to back. A setting, on by default, controls whether the queue advances automatically after each success or pauses for confirmation.
+- **Proxy writes.** Re-login, pause/resume an account, reset cooldown and update are designed now and gated behind confirmations that state the consequence. They may ship after v1.
+- **Harnesses are data, not brand.** Each harness gets a color from an ordered palette (equal OKLCH lightness and chroma, assigned by order, user-overridable) plus a neutral mark, so color is never the only cue. The same scheme holds for 1 to N harnesses.
+- **Brand.** The app icon and menu bar glyph must not depict specific harnesses. The first direction, two merging streams, was rejected; v2 explorations are in progress.
+
 ## Phases
 
 1. **Engine.** Turn the collector into the `actl` CLI with a versioned JSON contract. Add the manifest (`adopt`, `validate`, `plan`, `apply`) and tests against fixture home directories.
