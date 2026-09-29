@@ -280,3 +280,13 @@ import Testing
         #expect(fresh == "[scan]\nroots = [\"~/src\"]\n")
     }
 }
+
+@Suite struct LargeEngineOutput {
+    /// Regression: output larger than the 64 KB pipe buffer used to deadlock `run` (first run hung after adopt).
+    @Test func runReturnsMegabyteOfStdoutAndStderr() async throws {
+        let script = "head -c 1048576 /dev/zero | tr '\\\\0' 'a'; head -c 200000 /dev/zero | tr '\\\\0' 'e' >&2"
+        let engine = ProcessEngine(location: EngineLocation(executable: URL(fileURLWithPath: "/bin/sh"), prefixArgs: ["-c", script]))
+        let data = try await engine.run([])
+        #expect(data.count == 1_048_576)
+    }
+}

@@ -627,7 +627,8 @@ public final class AppStore {
         do {
             let env = try await engine.envelope(ManifestInfo.self, ["manifest", "adopt"] + cachedFlag)
             manifest = env.data
-            await refreshPlan()
+            // Don't make first run wait on the plan; it can take seconds and the window closes next.
+            Task { await refreshPlan() }
             return env.data
         } catch {
             showToast(Toast(title: "Could not adopt the manifest", detail: (error as? EngineError)?.errorDescription ?? error.localizedDescription, isError: true))

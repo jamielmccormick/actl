@@ -210,21 +210,31 @@ public final class ProcessEngine: Engine {
         let command = args.joined(separator: " ")
         return try await withTaskCancellationHandler {
             try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Data, Error>) in
-                let outHandle = out.fileHandleForReading
-                let errHandle = err.fileHandleForReading
-                process.terminationHandler = { proc in
-                    let stdout = outHandle.readDataToEndOfFile()
-                    let stderr = String(data: errHandle.readDataToEndOfFile(), encoding: .utf8) ?? ""
-                    if proc.terminationStatus == 0 {
-                        cont.resume(returning: stdout)
-                    } else {
-                        cont.resume(throwing: EngineError.failed(command: command, exitCode: proc.terminationStatus, stderr: stderr))
-                    }
-                }
                 do {
                     try process.run()
                 } catch {
                     cont.resume(throwing: EngineError.failed(command: command, exitCode: -1, stderr: error.localizedDescription))
+                    return
+                }
+                // Drain both pipes while the engine runs. Reading only after exit deadlocks as soon as
+                // output exceeds the 64 KB pipe buffer (inventory and plan are hundreds of KB).
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let errBox = DataBox()
+                    let group = DispatchGroup()
+                    group.enter()
+                    DispatchQueue.global(qos: .utility).async {
+                        errBox.data = err.fileHandleForReading.readDataToEndOfFile()
+                        group.leave()
+                    }
+                    let stdout = out.fileHandleForReading.readDataToEndOfFile()
+                    group.wait()
+                    process.waitUntilExit()
+                    if process.terminationStatus == 0 {
+                        cont.resume(returning: stdout)
+                    } else {
+                        let stderr = String(data: errBox.data, encoding: .utf8) ?? ""
+                        cont.resume(throwing: EngineError.failed(command: command, exitCode: process.terminationStatus, stderr: stderr))
+                    }
                 }
             }
         } onCancel: {
@@ -237,6 +247,12 @@ public final class ProcessEngine: Engine {
         let command = args.joined(separator: " ")
         return AsyncThrowingStream { continuation in
             let state = StreamState()
+            // Drain stderr concurrently too; a chatty engine would otherwise block on a full pipe.
+            let errBox = DataBox()
+            err.fileHandleForReading.readabilityHandler = { handle in
+                let chunk = handle.availableData
+                if chunk.isEmpty { handle.readabilityHandler = nil } else { errBox.append(chunk) }
+            }
             out.fileHandleForReading.readabilityHandler = { handle in
                 let chunk = handle.availableData
                 if chunk.isEmpty {
@@ -249,7 +265,9 @@ public final class ProcessEngine: Engine {
                 out.fileHandleForReading.readabilityHandler = nil
                 let rest = out.fileHandleForReading.readDataToEndOfFile()
                 for line in state.feed(rest) + state.finish() { continuation.yield(line) }
-                let stderr = String(data: err.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+                err.fileHandleForReading.readabilityHandler = nil
+                errBox.append(err.fileHandleForReading.readDataToEndOfFile())
+                let stderr = String(data: errBox.data, encoding: .utf8) ?? ""
                 if proc.terminationStatus == 0 || proc.terminationReason == .uncaughtSignal {
                     continuation.finish()
                 } else {
@@ -274,4 +292,15 @@ private final class StreamState: @unchecked Sendable {
     private var parser = JSONLParser()
     func feed(_ d: Data) -> [String] { lock.lock(); defer { lock.unlock() }; return parser.feed(d) }
     func finish() -> [String] { lock.lock(); defer { lock.unlock() }; return parser.finish() }
+}
+
+/// Thread-safe byte accumulator for pipe readers running off the main thread.
+final class DataBox: @unchecked Sendable {
+    private let lock = NSLock()
+    private var storage = Data()
+    var data: Data {
+        get { lock.withLock { storage } }
+        set { lock.withLock { storage = newValue } }
+    }
+    func append(_ chunk: Data) { lock.withLock { storage.append(chunk) } }
 }
