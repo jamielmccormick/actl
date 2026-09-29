@@ -1,0 +1,523 @@
+[
+  {
+    "id": "axiom",
+    "name": "Axiom",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "mcp",
+        "ref": "axiom",
+        "serverName": "axiom",
+        "health": "needs-auth",
+        "detail": "token expired Sep 21",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": [
+          "axiom-sre",
+          "axiom-alerting",
+          "building-dashboards"
+        ]
+      },
+      "codex": {
+        "kind": "mcp",
+        "ref": "axiom",
+        "serverName": "axiom",
+        "health": "connected",
+        "detail": "refreshed today 20:14",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": [
+          "axiom-sre",
+          "axiom-alerting",
+          "building-dashboards"
+        ]
+      }
+    },
+    "homepage": "https://axiom.com"
+  },
+  {
+    "id": "convex",
+    "name": "Convex",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "convex@claude-plugins-official",
+        "serverName": "plugin:convex:convex",
+        "health": "connected",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 2466,
+        "skills": [
+          "convex-schema",
+          "convex-functions",
+          "convex-deploy"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.convex.dev/mcp",
+          "serverName": "convex"
+        }
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "convex@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://convex.com"
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "brandColor": "#F24E1E",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "figma@claude-plugins-official",
+        "serverName": "plugin:figma:figma",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 2135,
+        "skills": [
+          "figma-inspect",
+          "figma-export"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.figma.com/mcp",
+          "serverName": "figma"
+        },
+        "contextEstimated": true
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "figma@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://figma.com"
+  },
+  {
+    "id": "gmail",
+    "name": "Gmail",
+    "brandColor": "#EA4335",
+    "parity": "only-codex",
+    "gapReason": "no Claude connector while CLIProxyAPI auth is active",
+    "providers": {
+      "codex": {
+        "kind": "connector",
+        "ref": "gmail@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://gmail.com"
+  },
+  {
+    "id": "google-drive",
+    "name": "Google Drive",
+    "brandColor": "#0F9D58",
+    "parity": "only-codex",
+    "gapReason": "no Claude connector while CLIProxyAPI auth is active",
+    "providers": {
+      "codex": {
+        "kind": "connector",
+        "ref": "google-drive@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://googledrive.com"
+  },
+  {
+    "id": "hubspot",
+    "name": "HubSpot",
+    "parity": "partial",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "hubspot@claude-plugins-official",
+        "serverName": "plugin:hubspot:hubspot",
+        "health": "failed",
+        "detail": "auth server does not support dynamic client registration",
+        "auth": "oauth",
+        "canSignIn": false,
+        "contextTokens": 2279,
+        "skills": [
+          "hubspot-sales"
+        ]
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "hubspot@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://hubspot.com"
+  },
+  {
+    "id": "notion",
+    "name": "Notion",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "notion@claude-plugins-official",
+        "serverName": "plugin:notion:notion",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 214,
+        "skills": [],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.notion.com/mcp",
+          "serverName": "notion"
+        }
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "notion@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://notion.com"
+  },
+  {
+    "id": "planetscale",
+    "name": "PlanetScale",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "planetscale@claude-plugins-official",
+        "serverName": "plugin:planetscale:planetscale",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 1507,
+        "skills": [
+          "planetscale-branching"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.planetscale.com/mcp",
+          "serverName": "planetscale"
+        }
+      },
+      "codex": {
+        "kind": "mcp",
+        "ref": "planetscale",
+        "serverName": "planetscale",
+        "health": "connected",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://planetscale.com"
+  },
+  {
+    "id": "posthog",
+    "name": "PostHog",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "mcp",
+        "ref": "posthog",
+        "serverName": "posthog",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": []
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "posthog@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://posthog.com"
+  },
+  {
+    "id": "acme-pulse",
+    "name": "Acme Pulse",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "mcp",
+        "ref": "acme-pulse",
+        "serverName": "acme-pulse",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": []
+      },
+      "codex": {
+        "kind": "mcp",
+        "ref": "acme-pulse",
+        "serverName": "acme-pulse",
+        "health": "connected",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://acmepulse.com"
+  },
+  {
+    "id": "sentry",
+    "name": "Sentry",
+    "brandColor": "#362D59",
+    "logo": "~/Library/Application Support/actl/logos/sentry.png",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "sentry@claude-plugins-official",
+        "serverName": "plugin:sentry:sentry",
+        "health": "needs-auth",
+        "detail": "OAuth · token expired Sep 21",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 1066,
+        "skills": [
+          "sentry-triage",
+          "sentry-release-health",
+          "sentry-query"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.sentry.dev/mcp",
+          "serverName": "sentry"
+        }
+      },
+      "codex": {
+        "kind": "mcp",
+        "ref": "sentry",
+        "serverName": "sentry",
+        "health": "connected",
+        "detail": "OAuth · refreshed today 20:14",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 0,
+        "skills": [
+          "sentry-triage",
+          "sentry-release-health",
+          "sentry-query"
+        ]
+      }
+    },
+    "homepage": "https://sentry.com"
+  },
+  {
+    "id": "slack",
+    "name": "Slack",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "slack@claude-plugins-official",
+        "serverName": "plugin:slack:slack",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 1288,
+        "skills": [
+          "slack-digest"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.slack.com/mcp",
+          "serverName": "slack"
+        }
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "slack@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://slack.com"
+  },
+  {
+    "id": "stripe",
+    "name": "Stripe",
+    "brandColor": "#635BFF",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "stripe@claude-plugins-official",
+        "serverName": "plugin:stripe:stripe",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 2240,
+        "skills": [
+          "stripe-payments",
+          "stripe-billing"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.stripe.com/mcp",
+          "serverName": "stripe"
+        },
+        "contextEstimated": true
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "stripe@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://stripe.com"
+  },
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "brandColor": "#3ECF8E",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "supabase@claude-plugins-official",
+        "serverName": "plugin:supabase:supabase",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 636,
+        "skills": [
+          "supabase-migrations"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.supabase.com/mcp",
+          "serverName": "supabase"
+        }
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "supabase@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://supabase.com"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "brandColor": "#000000",
+    "parity": "both",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "vercel@claude-plugins-official",
+        "serverName": "plugin:vercel:vercel",
+        "health": "needs-auth",
+        "auth": "oauth",
+        "canSignIn": true,
+        "contextTokens": 4219,
+        "skills": [
+          "vercel-deploy",
+          "vercel-env",
+          "vercel-logs",
+          "vercel-domains"
+        ],
+        "lazyAlternative": {
+          "transport": "http",
+          "url": "https://mcp.vercel.com/mcp",
+          "serverName": "vercel"
+        }
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "vercel@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://vercel.com"
+  },
+  {
+    "id": "zoom",
+    "name": "Zoom",
+    "brandColor": "#0B5CFF",
+    "parity": "partial",
+    "providers": {
+      "claude": {
+        "kind": "plugin",
+        "ref": "zoom-plugin@claude-plugins-official",
+        "serverName": "plugin:zoom-plugin:zoom-mcp",
+        "health": "failed",
+        "detail": "needs an API token (ZOOM_API_TOKEN)",
+        "auth": "token",
+        "canSignIn": false,
+        "contextTokens": 2981,
+        "skills": [
+          "zoom-meetings"
+        ]
+      },
+      "codex": {
+        "kind": "connector",
+        "ref": "zoom@openai-curated-remote",
+        "health": "connected",
+        "auth": "chatgpt",
+        "canSignIn": false,
+        "contextTokens": 0,
+        "skills": []
+      }
+    },
+    "homepage": "https://zoom.com"
+  }
+]

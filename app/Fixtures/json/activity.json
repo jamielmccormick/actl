@@ -1,0 +1,84 @@
+[
+  {
+    "runId": "2026-09-28T2140-418",
+    "at": "2026-09-28T21:40:12Z",
+    "source": "user",
+    "undoable": true,
+    "actions": [
+      {
+        "id": "plugin.uninstall:posthog",
+        "title": "Removed PostHog plugin (−30.2k tokens/session), kept its MCP",
+        "state": "ok"
+      },
+      {
+        "id": "skills.sync:user",
+        "title": "Copied 2 skills into ~/.claude/skills",
+        "state": "ok"
+      },
+      {
+        "id": "mcp.add:codex:axiom",
+        "title": "Added Axiom (MCP) to Codex",
+        "state": "ok"
+      },
+      {
+        "id": "plugin.enable:supabase",
+        "title": "Enabled Supabase plugin in Claude",
+        "state": "ok"
+      }
+    ]
+  },
+  {
+    "runId": "2026-09-26T1841-undo",
+    "at": "2026-09-26T18:41:00Z",
+    "source": "user",
+    "undoable": false,
+    "undoOf": "2026-09-26T1830-102",
+    "actions": [
+      {
+        "id": "undo:service.make-lazy:notion",
+        "title": "Restored Notion plugin in Claude from the backup",
+        "state": "ok"
+      }
+    ]
+  },
+  {
+    "runId": "2026-09-28T1912-watch",
+    "at": "2026-09-28T19:12:40Z",
+    "source": "watch",
+    "undoable": false,
+    "actions": [
+      {
+        "id": "watch:claude-update",
+        "title": "Claude Code updated to 2.1.283 · re-checked rules, found argent scope reverted",
+        "state": "failed"
+      }
+    ]
+  },
+  {
+    "runId": "2026-09-27T2304-auto",
+    "at": "2026-09-27T23:04:05Z",
+    "source": "auto",
+    "undoable": false,
+    "actions": [
+      {
+        "id": "proxy:cooldown",
+        "title": "Proxy moved m***@acme.dev to cooldown after 3 quota errors · routing on 1 account",
+        "state": "ok"
+      }
+    ]
+  },
+  {
+    "runId": "2026-09-26T1830-102",
+    "at": "2026-09-26T18:30:00Z",
+    "source": "user",
+    "undoable": true,
+    "undoneAt": "2026-09-26T18:41:00Z",
+    "actions": [
+      {
+        "id": "service.make-lazy:notion",
+        "title": "Switched Notion in Claude to its bare MCP server",
+        "state": "ok"
+      }
+    ]
+  }
+]

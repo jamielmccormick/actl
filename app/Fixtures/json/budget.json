@@ -1,0 +1,65 @@
+{
+  "harnesses": {
+    "claude": {
+      "total": 52145,
+      "categories": [
+        { "id": "plugins", "tokens": 27483 },
+        { "id": "drift", "tokens": 17350 },
+        { "id": "skills-listing", "tokens": 4020 },
+        { "id": "instructions", "tokens": 3292 }
+      ],
+      "levers": [
+        { "id": "rule:argent", "label": "argent rule (always-on)", "tokens": 17350, "kind": "rule", "action": "rescope", "estimated": false },
+        { "id": "plugin:vercel", "label": "Vercel plugin", "tokens": 4219, "kind": "plugin", "action": "make-lazy", "serviceId": "vercel", "estimated": false },
+        { "id": "skills-listing", "label": "Skills listing (236)", "tokens": 4020, "kind": "skills", "estimated": false },
+        { "id": "plugin:compound-writing", "label": "compound-writing plugin", "tokens": 3000, "kind": "plugin", "estimated": true },
+        { "id": "plugin:zoom", "label": "Zoom plugin", "tokens": 2981, "kind": "plugin", "serviceId": "zoom", "estimated": false },
+        { "id": "instructions:agents-import", "label": "AGENTS.md via @import", "tokens": 2517, "kind": "instructions", "estimated": false },
+        { "id": "plugin:convex", "label": "Convex plugin", "tokens": 2466, "kind": "plugin", "action": "make-lazy", "serviceId": "convex", "estimated": false },
+        { "id": "plugin:hubspot", "label": "HubSpot plugin", "tokens": 2279, "kind": "plugin", "serviceId": "hubspot", "estimated": false },
+        { "id": "plugin:stripe", "label": "Stripe plugin", "tokens": 2240, "kind": "plugin", "action": "make-lazy", "serviceId": "stripe", "estimated": false },
+        { "id": "plugin:figma", "label": "Figma plugin", "tokens": 2135, "kind": "plugin", "action": "make-lazy", "serviceId": "figma", "estimated": false },
+        { "id": "plugin:planetscale", "label": "PlanetScale plugin", "tokens": 1507, "kind": "plugin", "action": "make-lazy", "serviceId": "planetscale", "estimated": false },
+        { "id": "plugin:slack", "label": "Slack plugin", "tokens": 1288, "kind": "plugin", "action": "make-lazy", "serviceId": "slack", "estimated": false },
+        { "id": "plugin:sentry", "label": "Sentry plugin", "tokens": 1066, "kind": "plugin", "action": "make-lazy", "serviceId": "sentry", "estimated": false },
+        { "id": "instructions:claude-md", "label": "~/.claude/CLAUDE.md", "tokens": 624, "kind": "instructions", "estimated": false },
+        { "id": "plugin:supabase", "label": "Supabase plugin", "tokens": 636, "kind": "plugin", "action": "make-lazy", "serviceId": "supabase", "estimated": false },
+        { "id": "plugin:notion", "label": "Notion plugin", "tokens": 214, "kind": "plugin", "action": "make-lazy", "serviceId": "notion", "estimated": false },
+        { "id": "plugin:fizzy", "label": "fizzy plugin", "tokens": 200, "kind": "plugin", "estimated": true }
+      ]
+    },
+    "codex": {
+      "total": 9727,
+      "categories": [
+        { "id": "plugins", "tokens": 3300 },
+        { "id": "skills-listing", "tokens": 3910 },
+        { "id": "instructions", "tokens": 2517 }
+      ],
+      "levers": [
+        { "id": "skills-listing", "label": "Skills listing (316)", "tokens": 3910, "kind": "skills", "estimated": false },
+        { "id": "instructions:agents-md", "label": "~/.codex/AGENTS.md", "tokens": 2517, "kind": "instructions", "estimated": false },
+        { "id": "plugin:documents", "label": "documents plugin", "tokens": 980, "kind": "plugin", "estimated": false },
+        { "id": "plugin:spreadsheets", "label": "spreadsheets plugin", "tokens": 840, "kind": "plugin", "estimated": false },
+        { "id": "plugin:presentations", "label": "presentations plugin", "tokens": 790, "kind": "plugin", "estimated": false },
+        { "id": "plugin:pdf", "label": "pdf plugin", "tokens": 690, "kind": "plugin", "estimated": false }
+      ]
+    }
+  },
+  "loadPreview": {
+    "repo": "~/Code/acme/web",
+    "harnesses": {
+      "claude": { "total": 29963, "files": [
+        { "path": "~/.claude/CLAUDE.md", "reason": "global", "tokens": 624 },
+        { "path": "~/.codex/AGENTS.md", "reason": "@import, hop 1", "tokens": 2517 },
+        { "path": "~/.claude/rules/argent.md", "reason": "always-on · drift", "tokens": 17350 },
+        { "path": "~/Code/acme/AGENTS.md", "reason": "repo root", "tokens": 6331 },
+        { "path": "~/Code/acme/web/AGENTS.md", "reason": "cwd", "tokens": 3141 }
+      ] },
+      "codex": { "total": 11989, "files": [
+        { "path": "~/.codex/AGENTS.md", "reason": "global", "tokens": 2517 },
+        { "path": "~/Code/acme/AGENTS.md", "reason": "git root", "tokens": 6331 },
+        { "path": "~/Code/acme/web/AGENTS.md", "reason": "cwd", "tokens": 3141 }
+      ] }
+    }
+  }
+}

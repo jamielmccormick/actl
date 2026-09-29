@@ -1,0 +1,24 @@
+{
+  "level": "healthy",
+  "harnesses": [
+    {
+      "id": "claude",
+      "name": "Claude Code",
+      "connected": 31,
+      "total": 31,
+      "needsSignIn": 0,
+      "failed": 0
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "connected": 46,
+      "total": 46,
+      "needsSignIn": 0,
+      "failed": 0
+    }
+  ],
+  "attention": [],
+  "checkedAt": "2026-09-28T21:51:00Z",
+  "stale": false
+}

@@ -1,0 +1,10 @@
+{
+  "manifestPath": "~/.config/actl/manifest.toml",
+  "manifestExists": true,
+  "manifestErrors": [],
+  "actions": [],
+  "summary": {
+    "count": 0,
+    "tokensDelta": {}
+  }
+}

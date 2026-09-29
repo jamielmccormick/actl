@@ -1,0 +1,33 @@
+{
+  "level": "attention",
+  "harnesses": [
+    { "id": "claude", "name": "Claude Code", "connected": 15, "total": 31, "needsSignIn": 14, "failed": 2 },
+    { "id": "codex", "name": "Codex", "connected": 46, "total": 46, "needsSignIn": 0, "failed": 0 }
+  ],
+  "attention": [
+    { "id": "sign-in:claude", "severity": "warn", "kind": "sign-in", "title": "14 Claude servers need sign-in", "detail": "Sentry, Notion, Vercel, Figma, PostHog +9 · one browser flow each", "harness": "claude",
+      "fix": { "label": "Sign in…", "signIn": { "harness": "claude", "servers": ["plugin:sentry:sentry", "plugin:notion:notion", "plugin:vercel:vercel", "plugin:figma:figma", "posthog", "plugin:slack:slack", "plugin:stripe:stripe", "plugin:supabase:supabase", "axiom", "plugin:convex:convex", "plugin:planetscale:planetscale", "acme-pulse", "plugin:zoom-plugin:zoom-mcp", "plugin:hubspot:hubspot"] } } },
+    { "id": "sync:user", "severity": "info", "kind": "sync", "title": "3 skills pending sync to Claude", "detail": "impeccable, writing-evals, prototype", "harness": "claude",
+      "fix": { "label": "Sync", "actionIds": ["skills.sync:user"] } },
+    { "id": "drift:argent-rule", "severity": "warn", "kind": "drift", "title": "argent rule is always-on again", "detail": "Reverted by update · +17.4k tokens/session", "harness": "claude",
+      "fix": { "label": "Re-scope", "actionIds": ["instructions.rescope:argent"] } },
+    { "id": "failed:claude", "severity": "error", "kind": "failed", "title": "2 Claude servers failed", "detail": "Zoom needs a token · HubSpot incompatible", "harness": "claude",
+      "fix": { "label": "Details" } },
+    { "id": "quota:codex-acme", "severity": "warn", "kind": "quota", "title": "Proxy account m***@acme.dev hit its usage limit", "detail": "Retrying Oct 3, 09:00 · Codex traffic is routed to a***@example.com meanwhile", "harness": "codex",
+      "fix": { "label": "Details" } },
+    { "id": "update:cliproxyapi", "severity": "info", "kind": "update", "title": "CLIProxyAPI 8.0.4 available", "detail": "Installed 8.0.0 · restarts the proxy for ~3 s", "harness": "proxy",
+      "fix": { "label": "Update", "actionIds": ["proxy.update"] } },
+    { "id": "gap:codex-only", "severity": "info", "kind": "gap", "title": "Gmail and Google Drive exist only in Codex", "detail": "ChatGPT connectors with no Claude Code equivalent while the proxy is on", "harness": "codex",
+      "fix": { "label": "Accept gap" } }
+  ],
+  "proxy": {
+    "accounts": [
+      { "label": "a***@example.com", "state": "active" },
+      { "label": "m***@acme.dev", "state": "active" },
+      { "label": "a***@example.com", "state": "active" },
+      { "label": "m***@acme.dev", "state": "cooldown", "retryAt": "2026-10-03T09:00:00Z" }
+    ]
+  },
+  "checkedAt": "2026-09-28T21:51:00Z",
+  "stale": false
+}

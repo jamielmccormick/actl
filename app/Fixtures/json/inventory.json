@@ -1,0 +1,1579 @@
+{
+ "generatedAt": "2026-09-28T21:51:00Z",
+ "tookMs": 8412,
+ "versions": {
+  "claude": "2.1.283",
+  "codex": "0.158.0"
+ },
+ "harnesses": [
+  {
+   "id": "claude",
+   "name": "Claude Code",
+   "code": "CC",
+   "supported": true,
+   "installed": true,
+   "version": "2.1.283",
+   "home": "~/.claude",
+   "colorSlot": 0
+  },
+  {
+   "id": "codex",
+   "name": "Codex",
+   "code": "CX",
+   "supported": true,
+   "installed": true,
+   "version": "0.158.0",
+   "home": "~/.codex",
+   "colorSlot": 1
+  },
+  {
+   "id": "cursor",
+   "name": "Cursor",
+   "code": "CU",
+   "supported": false,
+   "installed": true,
+   "version": "2.4.1",
+   "home": "~/.cursor",
+   "colorSlot": 2
+  },
+  {
+   "id": "gemini",
+   "name": "Gemini CLI",
+   "code": "GM",
+   "supported": false,
+   "installed": true,
+   "version": "0.9.2",
+   "home": "~/.gemini",
+   "colorSlot": 3
+  },
+  {
+   "id": "copilot",
+   "name": "Copilot CLI",
+   "code": "CP",
+   "supported": false,
+   "installed": true,
+   "version": "1.3.0",
+   "home": "~/.copilot",
+   "colorSlot": 4
+  },
+  {
+   "id": "opencode",
+   "name": "OpenCode",
+   "code": "OC",
+   "supported": false,
+   "installed": false,
+   "colorSlot": 5
+  }
+ ],
+ "config": {
+  "path": "~/.config/actl/config.toml",
+  "exists": true,
+  "scanRoots": [
+   "~/Code",
+   "~/Documents/Notes"
+  ],
+  "workspaces": [
+   "~/Documents/Notes"
+  ]
+ },
+ "repos": [
+  {
+   "name": "acme",
+   "path": "~/Code/acme",
+   "kind": "repo",
+   "branch": "main",
+   "remote": "git@github.com:acme/acme.git"
+  },
+  {
+   "name": "acme-mobile",
+   "path": "~/Code/acme-mobile",
+   "kind": "repo",
+   "branch": "main",
+   "remote": "git@github.com:acme/acme-mobile.git"
+  },
+  {
+   "name": "acme-ai",
+   "path": "~/Code/acme-ai",
+   "kind": "repo",
+   "branch": "feat/eval-harness"
+  },
+  {
+   "name": "actl",
+   "path": "~/Code/actl",
+   "kind": "repo",
+   "branch": "main",
+   "remote": "git@github.com:example/actl.git"
+  },
+  {
+   "name": "pulse",
+   "path": "~/Code/pulse",
+   "kind": "repo",
+   "branch": "main"
+  },
+  {
+   "name": "dotfiles",
+   "path": "~/Code/dotfiles",
+   "kind": "repo",
+   "branch": "main"
+  },
+  {
+   "name": "notebooks",
+   "path": "~/Documents/Notes/notebooks",
+   "kind": "repo",
+   "branch": "main"
+  },
+  {
+   "name": "experiments",
+   "path": "~/Documents/Notes/experiments",
+   "kind": "repo",
+   "branch": "main"
+  },
+  {
+   "name": "site",
+   "path": "~/Documents/Notes/site",
+   "kind": "repo",
+   "branch": "main"
+  },
+  {
+   "name": "Notes",
+   "path": "~/Documents/Notes",
+   "kind": "workspace"
+  }
+ ],
+ "instructions": [
+  {
+   "scope": "global",
+   "owner": "claude",
+   "path": "~/.claude/CLAUDE.md",
+   "rel": "CLAUDE.md",
+   "name": "CLAUDE.md",
+   "bytes": 2496,
+   "lines": 31,
+   "tracked": false,
+   "shimOnlyImportsAgents": true,
+   "pathScoped": false,
+   "imports": [
+    "~/.codex/AGENTS.md"
+   ],
+   "loadedBy": [
+    "claude"
+   ],
+   "preview": "@~/.codex/AGENTS.md"
+  },
+  {
+   "scope": "global",
+   "owner": "codex",
+   "path": "~/.codex/AGENTS.md",
+   "rel": "AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 10068,
+   "lines": 142,
+   "tracked": false,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# Working with the Acme team"
+  },
+  {
+   "scope": "global",
+   "owner": "claude",
+   "path": "~/.claude/rules/argent.md",
+   "rel": "rules/argent.md",
+   "name": "argent.md",
+   "bytes": 69400,
+   "lines": 410,
+   "tracked": false,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude"
+   ],
+   "preview": "---\npaths: [\"**\"]\n---"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/AGENTS.md",
+   "rel": "AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 25324,
+   "lines": 298,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# Acme monorepo"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/web/AGENTS.md",
+   "rel": "web/AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 12564,
+   "lines": 160,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# Acme web"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/packages/backend/CLAUDE.md",
+   "rel": "packages/backend/CLAUDE.md",
+   "name": "CLAUDE.md",
+   "bytes": 3812,
+   "lines": 44,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude"
+   ],
+   "preview": "# Backend"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.claude/rules/testing.md",
+   "rel": ".claude/rules/testing.md",
+   "name": "testing.md",
+   "bytes": 1400,
+   "lines": 22,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": true,
+   "imports": [],
+   "loadedBy": [
+    "claude"
+   ],
+   "preview": "---\npaths: [\"**/*.test.ts\"]\n---"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme-mobile",
+   "path": "~/Code/acme-mobile/AGENTS.md",
+   "rel": "AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 8212,
+   "lines": 101,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# Acme mobile"
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/acme-mobile",
+   "path": "~/Code/acme-mobile/CLAUDE.local.md",
+   "rel": "CLAUDE.local.md",
+   "name": "CLAUDE.local.md",
+   "bytes": 612,
+   "lines": 9,
+   "tracked": false,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude"
+   ],
+   "preview": "Use the iPhone 17 simulator."
+  },
+  {
+   "scope": "repo",
+   "owner": "~/Code/actl",
+   "path": "~/Code/actl/AGENTS.md",
+   "rel": "AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 2210,
+   "lines": 30,
+   "tracked": true,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# actl"
+  },
+  {
+   "scope": "workspace",
+   "owner": "~/Documents/Notes",
+   "path": "~/Documents/Notes/AGENTS.md",
+   "rel": "AGENTS.md",
+   "name": "AGENTS.md",
+   "bytes": 980,
+   "lines": 14,
+   "tracked": false,
+   "shimOnlyImportsAgents": false,
+   "pathScoped": false,
+   "imports": [],
+   "loadedBy": [
+    "claude",
+    "codex"
+   ],
+   "preview": "# Notes"
+  }
+ ],
+ "skills": [
+  {
+   "name": "acme-engineering",
+   "dirName": "acme-engineering",
+   "description": "Acme engineering skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/acme-engineering",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "conflict"
+  },
+  {
+   "name": "impeccable",
+   "dirName": "impeccable",
+   "description": "Impeccable skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/impeccable",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "pending"
+  },
+  {
+   "name": "writing-evals",
+   "dirName": "writing-evals",
+   "description": "Writing evals skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/writing-evals",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "pending"
+  },
+  {
+   "name": "prototype",
+   "dirName": "prototype",
+   "description": "Prototype skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/prototype",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "pending"
+  },
+  {
+   "name": "domain-modeling",
+   "dirName": "domain-modeling",
+   "description": "Domain modeling skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/domain-modeling",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "controlling-costs",
+   "dirName": "controlling-costs",
+   "description": "Controlling costs skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/controlling-costs",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "query-metrics",
+   "dirName": "query-metrics",
+   "description": "Query metrics skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/query-metrics",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "writing-for-agents",
+   "dirName": "writing-for-agents",
+   "description": "Writing for agents skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/writing-for-agents",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "codebase-design",
+   "dirName": "codebase-design",
+   "description": "Codebase design skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/codebase-design",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "grilling",
+   "dirName": "grilling",
+   "description": "Grilling skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/grilling",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "axiom-sre",
+   "dirName": "axiom-sre",
+   "description": "Axiom sre skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/axiom-sre",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "axiom-alerting",
+   "dirName": "axiom-alerting",
+   "description": "Axiom alerting skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/axiom-alerting",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "building-dashboards",
+   "dirName": "building-dashboards",
+   "description": "Building dashboards skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/building-dashboards",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "metrics-chart",
+   "dirName": "metrics-chart",
+   "description": "Metrics chart skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/metrics-chart",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "unslop",
+   "dirName": "unslop",
+   "description": "Unslop skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/unslop",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "wizard",
+   "dirName": "wizard",
+   "description": "Wizard skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/wizard",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "find-skills",
+   "dirName": "find-skills",
+   "description": "Find skills skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/find-skills",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "dataviz",
+   "dirName": "dataviz",
+   "description": "Dataviz skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/dataviz",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "interface-craft",
+   "dirName": "interface-craft",
+   "description": "Interface craft skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/interface-craft",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "spl-to-apl",
+   "dirName": "spl-to-apl",
+   "description": "Spl to apl skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/spl-to-apl",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "babysit-pr",
+   "dirName": "babysit-pr",
+   "description": "Babysit pr skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/babysit-pr",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "merge-pr",
+   "dirName": "merge-pr",
+   "description": "Merge pr skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/merge-pr",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "code-review",
+   "dirName": "code-review",
+   "description": "Code review skill",
+   "source": "agents-user",
+   "owner": "~/.agents/skills",
+   "path": "~/.agents/skills/code-review",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "compound-outline",
+   "dirName": "compound-outline",
+   "description": "compound-outline from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-outline",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-draft",
+   "dirName": "compound-draft",
+   "description": "compound-draft from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-draft",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-edit",
+   "dirName": "compound-edit",
+   "description": "compound-edit from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-edit",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-headline",
+   "dirName": "compound-headline",
+   "description": "compound-headline from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-headline",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-hook",
+   "dirName": "compound-hook",
+   "description": "compound-hook from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-hook",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-cta",
+   "dirName": "compound-cta",
+   "description": "compound-cta from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-cta",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-summary",
+   "dirName": "compound-summary",
+   "description": "compound-summary from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-summary",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-thread",
+   "dirName": "compound-thread",
+   "description": "compound-thread from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-thread",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-newsletter",
+   "dirName": "compound-newsletter",
+   "description": "compound-newsletter from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-newsletter",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-landing",
+   "dirName": "compound-landing",
+   "description": "compound-landing from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-landing",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "compound-email",
+   "dirName": "compound-email",
+   "description": "compound-email from the compound-writing plugin",
+   "source": "claude-plugin",
+   "owner": "compound-writing",
+   "path": "~/.claude/plugins/cache/compound-writing/skills/compound-email",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "fizzy",
+   "dirName": "fizzy",
+   "description": "fizzy from the fizzy plugin",
+   "source": "claude-plugin",
+   "owner": "fizzy",
+   "path": "~/.claude/plugins/cache/fizzy/skills/fizzy",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "sentry-triage",
+   "dirName": "sentry-triage",
+   "description": "sentry-triage from the sentry plugin",
+   "source": "claude-plugin",
+   "owner": "sentry",
+   "path": "~/.claude/plugins/cache/sentry/skills/sentry-triage",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "sentry-release-health",
+   "dirName": "sentry-release-health",
+   "description": "sentry-release-health from the sentry plugin",
+   "source": "claude-plugin",
+   "owner": "sentry",
+   "path": "~/.claude/plugins/cache/sentry/skills/sentry-release-health",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "sentry-query",
+   "dirName": "sentry-query",
+   "description": "sentry-query from the sentry plugin",
+   "source": "claude-plugin",
+   "owner": "sentry",
+   "path": "~/.claude/plugins/cache/sentry/skills/sentry-query",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": true
+   },
+   "syncState": "in-sync"
+  },
+  {
+   "name": "vercel-deploy",
+   "dirName": "vercel-deploy",
+   "description": "vercel-deploy from the vercel plugin",
+   "source": "claude-plugin",
+   "owner": "vercel",
+   "path": "~/.claude/plugins/cache/vercel/skills/vercel-deploy",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "vercel-env",
+   "dirName": "vercel-env",
+   "description": "vercel-env from the vercel plugin",
+   "source": "claude-plugin",
+   "owner": "vercel",
+   "path": "~/.claude/plugins/cache/vercel/skills/vercel-env",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "vercel-logs",
+   "dirName": "vercel-logs",
+   "description": "vercel-logs from the vercel plugin",
+   "source": "claude-plugin",
+   "owner": "vercel",
+   "path": "~/.claude/plugins/cache/vercel/skills/vercel-logs",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "vercel-domains",
+   "dirName": "vercel-domains",
+   "description": "vercel-domains from the vercel plugin",
+   "source": "claude-plugin",
+   "owner": "vercel",
+   "path": "~/.claude/plugins/cache/vercel/skills/vercel-domains",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "stripe-payments",
+   "dirName": "stripe-payments",
+   "description": "stripe-payments from the stripe plugin",
+   "source": "claude-plugin",
+   "owner": "stripe",
+   "path": "~/.claude/plugins/cache/stripe/skills/stripe-payments",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "stripe-billing",
+   "dirName": "stripe-billing",
+   "description": "stripe-billing from the stripe plugin",
+   "source": "claude-plugin",
+   "owner": "stripe",
+   "path": "~/.claude/plugins/cache/stripe/skills/stripe-billing",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "convex-schema",
+   "dirName": "convex-schema",
+   "description": "convex-schema from the convex plugin",
+   "source": "claude-plugin",
+   "owner": "convex",
+   "path": "~/.claude/plugins/cache/convex/skills/convex-schema",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "convex-functions",
+   "dirName": "convex-functions",
+   "description": "convex-functions from the convex plugin",
+   "source": "claude-plugin",
+   "owner": "convex",
+   "path": "~/.claude/plugins/cache/convex/skills/convex-functions",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "convex-deploy",
+   "dirName": "convex-deploy",
+   "description": "convex-deploy from the convex plugin",
+   "source": "claude-plugin",
+   "owner": "convex",
+   "path": "~/.claude/plugins/cache/convex/skills/convex-deploy",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "figma-inspect",
+   "dirName": "figma-inspect",
+   "description": "figma-inspect from the figma plugin",
+   "source": "claude-plugin",
+   "owner": "figma",
+   "path": "~/.claude/plugins/cache/figma/skills/figma-inspect",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "figma-export",
+   "dirName": "figma-export",
+   "description": "figma-export from the figma plugin",
+   "source": "claude-plugin",
+   "owner": "figma",
+   "path": "~/.claude/plugins/cache/figma/skills/figma-export",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "supabase-migrations",
+   "dirName": "supabase-migrations",
+   "description": "supabase-migrations from the supabase plugin",
+   "source": "claude-plugin",
+   "owner": "supabase",
+   "path": "~/.claude/plugins/cache/supabase/skills/supabase-migrations",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "slack-digest",
+   "dirName": "slack-digest",
+   "description": "slack-digest from the slack plugin",
+   "source": "claude-plugin",
+   "owner": "slack",
+   "path": "~/.claude/plugins/cache/slack/skills/slack-digest",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "hubspot-sales",
+   "dirName": "hubspot-sales",
+   "description": "hubspot-sales from the hubspot plugin",
+   "source": "claude-plugin",
+   "owner": "hubspot",
+   "path": "~/.claude/plugins/cache/hubspot/skills/hubspot-sales",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "zoom-meetings",
+   "dirName": "zoom-meetings",
+   "description": "zoom-meetings from the zoom plugin",
+   "source": "claude-plugin",
+   "owner": "zoom",
+   "path": "~/.claude/plugins/cache/zoom/skills/zoom-meetings",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "planetscale-branching",
+   "dirName": "planetscale-branching",
+   "description": "planetscale-branching from the planetscale plugin",
+   "source": "claude-plugin",
+   "owner": "planetscale",
+   "path": "~/.claude/plugins/cache/planetscale/skills/planetscale-branching",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": true,
+    "codex": false
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-release",
+   "dirName": "acme-release",
+   "description": "acme-release repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-release",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-migrations",
+   "dirName": "acme-migrations",
+   "description": "acme-migrations repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-migrations",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-design-system",
+   "dirName": "acme-design-system",
+   "description": "acme-design-system repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-design-system",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-api-conventions",
+   "dirName": "acme-api-conventions",
+   "description": "acme-api-conventions repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-api-conventions",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-testing",
+   "dirName": "acme-testing",
+   "description": "acme-testing repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-testing",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-observability",
+   "dirName": "acme-observability",
+   "description": "acme-observability repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-observability",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-billing",
+   "dirName": "acme-billing",
+   "description": "acme-billing repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-billing",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-onboarding",
+   "dirName": "acme-onboarding",
+   "description": "acme-onboarding repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-onboarding",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-mobile",
+   "dirName": "acme-mobile",
+   "description": "acme-mobile repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-mobile",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-web",
+   "dirName": "acme-web",
+   "description": "acme-web repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-web",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-i18n",
+   "dirName": "acme-i18n",
+   "description": "acme-i18n repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-i18n",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-analytics",
+   "dirName": "acme-analytics",
+   "description": "acme-analytics repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-analytics",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-security",
+   "dirName": "acme-security",
+   "description": "acme-security repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-security",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-ci",
+   "dirName": "acme-ci",
+   "description": "acme-ci repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-ci",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-docs",
+   "dirName": "acme-docs",
+   "description": "acme-docs repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-docs",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-support",
+   "dirName": "acme-support",
+   "description": "acme-support repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-support",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-data",
+   "dirName": "acme-data",
+   "description": "acme-data repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-data",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  },
+  {
+   "name": "acme-infra",
+   "dirName": "acme-infra",
+   "description": "acme-infra repo skill",
+   "source": "agents-project",
+   "owner": "~/Code/acme",
+   "path": "~/Code/acme/.agents/skills/acme-infra",
+   "broken": false,
+   "pinnedToCodexPluginVersion": false,
+   "codexDisabled": false,
+   "visibleIn": {
+    "claude": false,
+    "codex": true
+   },
+   "syncState": "only-here"
+  }
+ ],
+ "plugins": {
+  "claude": [
+   {
+    "id": "sentry@claude-plugins-official",
+    "enabled": true,
+    "version": "0.1.4",
+    "hasMcp": true,
+    "hasSkills": true
+   },
+   {
+    "id": "vercel@claude-plugins-official",
+    "enabled": true,
+    "version": "1.2.0",
+    "hasMcp": true,
+    "hasSkills": true
+   },
+   {
+    "id": "compound-writing@claude-plugins-official",
+    "enabled": true,
+    "version": "0.3.1",
+    "hasMcp": false,
+    "hasSkills": true
+   },
+   {
+    "id": "fizzy@community",
+    "enabled": true,
+    "version": "0.1.0",
+    "hasMcp": false,
+    "hasSkills": true
+   }
+  ],
+  "codex": [
+   {
+    "id": "notion@openai-curated-remote",
+    "enabled": true,
+    "cached": true,
+    "connector": true
+   },
+   {
+    "id": "documents@openai",
+    "enabled": true,
+    "cached": true,
+    "connector": false
+   },
+   {
+    "id": "spreadsheets@openai",
+    "enabled": true,
+    "cached": true,
+    "connector": false
+   },
+   {
+    "id": "presentations@openai",
+    "enabled": true,
+    "cached": true,
+    "connector": false
+   },
+   {
+    "id": "pdf@openai",
+    "enabled": true,
+    "cached": true,
+    "connector": false
+   }
+  ]
+ },
+ "findings": [
+  {
+   "severity": "error",
+   "area": "mcp",
+   "title": "2 Claude servers failed",
+   "detail": "Zoom needs a token \u00b7 HubSpot incompatible"
+  },
+  {
+   "severity": "warn",
+   "area": "instructions",
+   "title": "argent rule is always-on again",
+   "detail": "Reverted by update \u00b7 +17.4k tokens/session",
+   "fix": "actl apply instructions.rescope:argent"
+  },
+  {
+   "severity": "info",
+   "area": "skills",
+   "title": "3 skills pending sync to Claude",
+   "detail": "impeccable, writing-evals, prototype"
+  }
+ ]
+}

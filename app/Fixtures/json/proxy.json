@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-28T21:53:00Z",
+  "endpoint": "127.0.0.1:8317",
+  "listening": true,
+  "keyConfigured": true,
+  "installedVersion": "8.0.0",
+  "versionSource": "X-CPA-VERSION header",
+  "latestVersion": "8.0.4",
+  "config": { "strategy": "round-robin", "sessionAffinity": "24h", "retry": 1 },
+  "accounts": [
+    { "ref": "0", "provider": "claude", "email": "a***@example.com", "accountType": "Max plan", "status": "active", "disabled": false, "unavailable": false, "lastRefresh": "2026-09-28T00:31:00Z", "success": 4039, "failed": 4,
+      "recent": [ {"success":0,"failed":0},{"success":0,"failed":0},{"success":1,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":2,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":1,"failed":0},{"success":6,"failed":0},{"success":7,"failed":0},{"success":3,"failed":0},{"success":9,"failed":0},{"success":16,"failed":1},{"success":13,"failed":0},{"success":13,"failed":0},{"success":1,"failed":0} ] },
+    { "ref": "1", "provider": "claude", "email": "m***@acme.dev", "accountType": "Team plan", "status": "active", "disabled": false, "unavailable": false, "lastRefresh": "2026-09-28T01:45:00Z", "success": 377, "failed": 1,
+      "recent": [ {"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":1,"failed":0},{"success":15,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0} ] },
+    { "ref": "2", "provider": "codex", "email": "a***@example.com", "accountType": "Pro plan", "status": "active", "statusMessage": "all Codex traffic", "disabled": false, "unavailable": false, "lastRefresh": "2026-09-27T23:00:00Z", "success": 1052, "failed": 15,
+      "recent": [ {"success":0,"failed":0},{"success":0,"failed":0},{"success":6,"failed":0},{"success":2,"failed":1},{"success":2,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":0,"failed":0},{"success":2,"failed":0},{"success":3,"failed":0},{"success":4,"failed":0},{"success":3,"failed":0} ] },
+    { "ref": "3", "provider": "codex", "email": "m***@acme.dev", "accountType": "Business plan", "status": "cooldown", "statusMessage": "Usage limit reached · weekly window started Sep 28 01:15 · 3 quota errors moved it here automatically · nothing routed since", "disabled": false, "unavailable": true, "nextRetryAfter": "2026-10-03T09:00:00Z", "success": 2465, "failed": 12,
+      "recent": [] }
+  ],
+  "apiKeyUsage": [],
+  "errorLogs": [
+    { "name": "error-api-hello-2026-09-28T215325-442.log", "size": 693, "modified": "2026-09-28T21:53:25Z" },
+    { "name": "error-api-hello-2026-09-28T215018-440.log", "size": 693, "modified": "2026-09-28T21:50:18Z" },
+    { "name": "error-api-hello-2026-09-28T214910-438.log", "size": 693, "modified": "2026-09-28T21:49:10Z" },
+    { "name": "error-api-hello-2026-09-28T214859-436.log", "size": 693, "modified": "2026-09-28T21:48:59Z" }
+  ],
+  "errors": {},
+  "tookMs": 212
+}

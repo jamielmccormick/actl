@@ -1,0 +1,150 @@
+{
+  "manifestPath": "~/.config/actl/manifest.toml",
+  "manifestExists": true,
+  "manifestErrors": [],
+  "actions": [
+    {
+      "id": "instructions.rescope:argent",
+      "harness": "claude",
+      "group": "instructions",
+      "kind": "rule.rescope",
+      "title": "Re-scope the argent rule to mobile paths",
+      "detail": "~/.claude/rules/argent.md · edits 1 line of frontmatter · Claude Code update 2.1.283 reverted it",
+      "consequence": "−17 350 tokens/session",
+      "tokensDelta": -17350,
+      "diff": {
+        "path": "~/.claude/rules/argent.md",
+        "before": "paths: [\"**\"]",
+        "after": "paths: [\"apps/*-mobile/**\", \"**/ios/**\", \"**/android/**\"]"
+      },
+      "reversible": true,
+      "defaultSelected": true
+    },
+    {
+      "id": "skills.sync:user",
+      "harness": "claude",
+      "group": "skills",
+      "kind": "skills.sync",
+      "title": "Copy 3 changed skills into ~/.claude/skills",
+      "detail": "impeccable, writing-evals, prototype · from ~/.agents/skills · hash manifest updated",
+      "consequence": "Parity restored",
+      "reversible": true,
+      "defaultSelected": true
+    },
+    {
+      "id": "skills.resolve:acme-engineering",
+      "harness": "claude",
+      "group": "skills",
+      "kind": "skills.resolve-conflict",
+      "title": "acme-engineering was edited in place in Claude — which copy wins?",
+      "detail": "Copies are never overwritten silently · pick one to include this item",
+      "requiresChoice": {
+        "options": [
+          {
+            "id": "keep-claude",
+            "label": "Keep Claude edit"
+          },
+          {
+            "id": "take-canonical",
+            "label": "Take canonical"
+          }
+        ]
+      },
+      "diff": {
+        "path": "~/.claude/skills/acme-engineering/SKILL.md",
+        "before": "Use bun test before every commit.",
+        "after": "Use bun test and typecheck before every commit."
+      },
+      "reversible": true,
+      "defaultSelected": false
+    },
+    {
+      "id": "services.disable-mcp:hubspot",
+      "harness": "claude",
+      "group": "services",
+      "kind": "plugin.disable",
+      "title": "Turn off HubSpot's MCP in Claude, keep the hubspot-sales skills",
+      "detail": "Its auth server can't do dynamic client registration · Codex keeps the ChatGPT connector",
+      "consequence": "Failed → Off",
+      "reversible": true,
+      "defaultSelected": true
+    },
+    {
+      "id": "mcp.add:codex:creative-production",
+      "harness": "codex",
+      "group": "services",
+      "kind": "mcp.add",
+      "title": "Add Creative Production (MCP) to Codex",
+      "detail": "Claude-only today · stdio · appends [mcp_servers.creative_production] to ~/.codex/config.toml",
+      "consequence": "Gap closed",
+      "reversible": true,
+      "defaultSelected": true
+    },
+    {
+      "id": "service.make-lazy:vercel",
+      "harness": "claude",
+      "group": "services",
+      "kind": "service.make-lazy",
+      "title": "Switch Vercel in Claude to its bare MCP server",
+      "detail": "Removes plugin vercel@claude-plugins-official · adds https://mcp.vercel.com/mcp · loses 4 plugin skills and updates",
+      "consequence": "−4 219 tokens/session",
+      "tokensDelta": -4219,
+      "reversible": true,
+      "defaultSelected": false
+    },
+    {
+      "id": "service.make-lazy:convex",
+      "harness": "claude",
+      "group": "services",
+      "kind": "service.make-lazy",
+      "title": "Switch Convex in Claude to its bare MCP server",
+      "detail": "Removes plugin convex@claude-plugins-official · adds https://mcp.convex.dev/mcp · loses 3 plugin skills and updates",
+      "consequence": "−2 466 tokens/session",
+      "tokensDelta": -2466,
+      "reversible": true,
+      "defaultSelected": false
+    },
+    {
+      "id": "service.make-lazy:figma",
+      "harness": "claude",
+      "group": "services",
+      "kind": "service.make-lazy",
+      "title": "Switch Figma in Claude to its bare MCP server",
+      "detail": "Removes plugin figma@claude-plugins-official · adds https://mcp.figma.com/mcp · loses 2 plugin skills and updates",
+      "consequence": "−2 135 tokens/session",
+      "tokensDelta": -2135,
+      "reversible": true,
+      "defaultSelected": false
+    },
+    {
+      "id": "service.make-lazy:sentry",
+      "harness": "claude",
+      "group": "services",
+      "kind": "service.make-lazy",
+      "title": "Switch Sentry in Claude to its bare MCP server",
+      "detail": "Removes plugin sentry@claude-plugins-official · adds https://mcp.sentry.dev/mcp · loses 3 plugin skills and updates",
+      "consequence": "−1 066 tokens/session",
+      "tokensDelta": -1066,
+      "reversible": true,
+      "defaultSelected": false
+    },
+    {
+      "id": "proxy.update",
+      "harness": "proxy",
+      "group": "proxy",
+      "kind": "proxy.update",
+      "title": "Update CLIProxyAPI 8.0.0 → 8.0.4",
+      "detail": "brew upgrade cliproxyapi · restarts the proxy for about 3 s · in-flight requests retry once",
+      "consequence": "Brief restart",
+      "reversible": false,
+      "defaultSelected": true
+    }
+  ],
+  "summary": {
+    "count": 10,
+    "tokensDelta": {
+      "claude": -17350,
+      "codex": 0
+    }
+  }
+}
